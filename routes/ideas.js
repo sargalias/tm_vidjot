@@ -41,6 +41,7 @@ router.post('/', formValidation, (req, res) => {
         if (err) {
             return next(err);
         }
+        req.flash('success_msg', 'Video idea added');
         res.redirect('/ideas');
     });
 });
@@ -82,6 +83,7 @@ router.put('/:idea_id', formValidation, (req, res, next) => {
             if (err) {
                 return next(err);
             }
+            req.flash('success_msg', 'Video idea updated');
             res.redirect('/ideas/');
         });
     });
@@ -92,6 +94,7 @@ router.delete('/:idea_id', (req, res, next) => {
         if (err) {
             return next(err);
         }
+        req.flash('success_msg', 'Video idea removed');
         res.redirect('/ideas');
     });
 });
