@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { body, validationResult } = require('express-validator/check');
 const { matchedData, sanitizeBody } = require('express-validator/filter');
+const Idea = require('../models/Idea');
 
 router.get('/', (req, res) => {
     res.send('Not implemented');
@@ -20,7 +21,13 @@ router.post('/', [
             details: req.body.details
         });
     }
-    res.send('success');
+    const idea = new Idea(req.body);
+    idea.save((err, idea) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/ideas');
+    });
 });
 
 router.get('/new', (req, res) => {
