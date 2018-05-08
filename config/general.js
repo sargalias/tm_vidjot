@@ -11,7 +11,7 @@ function config(app) {
     app.set('view engine', 'handlebars');
 
     // Public folder
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, '../public')));
 
     // Body-Parser middleware
     app.use(express.urlencoded({extended: false}));
