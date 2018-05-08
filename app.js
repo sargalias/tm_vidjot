@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const db = require('./config/db');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 
 const app = express();
@@ -20,6 +22,20 @@ app.use(express.json());
 
 // Method override middleware
 app.use(methodOverride('_method'));
+
+// Session middleware
+let sessionConfig = {
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+};
+if (process.env.NODE_ENV === 'production') {
+    sessionConfig.cookie = {
+        secure: true
+    };
+    app.set('trust proxy', 1);
+}
+app.use(session(sessionConfig));
 
 
 // Routes
