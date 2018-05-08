@@ -1,10 +1,12 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 require('dotenv').config();
 
 const app = express();
 
 
-app.set('view engine', 'pug');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 // Routes
 const routes = require('./routes/index');
