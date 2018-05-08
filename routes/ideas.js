@@ -4,7 +4,15 @@ const { matchedData, sanitizeBody } = require('express-validator/filter');
 const Idea = require('../models/Idea');
 
 router.get('/', (req, res) => {
-    res.send('Not implemented');
+    Idea
+        .find()
+        .sort({date: -1})
+        .exec((err, ideas) => {
+            if (err) {
+                return next(err);
+            }
+            res.render('ideas/index', {ideas: ideas});
+        });
 });
 
 router.post('/', [
