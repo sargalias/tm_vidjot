@@ -18,7 +18,9 @@ app.set('view engine', 'handlebars');
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-// methodOverride
+// Method override middleware
+app.use(methodOverride('_method'));
+
 
 // Routes
 const indexRoutes = require('./routes/index');
