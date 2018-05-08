@@ -15,6 +15,10 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/new', (req, res, next) => {
+    res.render('ideas/new');
+});
+
 router.post('/', [
     body('title', 'Title is required').trim().isLength({min: 1}),
     body('details', 'Details are required').trim().isLength({min: 1}),
@@ -38,8 +42,18 @@ router.post('/', [
     });
 });
 
-router.get('/new', (req, res) => {
-    res.render('ideas/new');
+router.get('/:idea_id/edit', (req, res, next) => {
+    Idea.findById(req.params.idea_id, (err, idea) => {
+        if (err) {
+            return next(err);
+        }
+        if (idea === null) {
+            let err = new Error('Idea could not be found');
+            err.statusCode = 404;
+            return next(err);
+        }
+        res.render('ideas/edit', {idea: idea});
+    });
 });
 
 module.exports = router;

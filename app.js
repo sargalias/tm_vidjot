@@ -3,6 +3,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 
 
 const app = express();
@@ -16,6 +17,8 @@ app.set('view engine', 'handlebars');
 // Body-Parser middleware
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+
+// methodOverride
 
 // Routes
 const indexRoutes = require('./routes/index');
