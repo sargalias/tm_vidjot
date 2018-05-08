@@ -14,8 +14,11 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // Routes
-const routes = require('./routes/index');
-app.use(routes);
+const indexRoutes = require('./routes/index');
+const ideaRoutes = require('./routes/ideas');
+
+app.use(indexRoutes);
+app.use('/ideas', ideaRoutes);
 
 
 
