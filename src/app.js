@@ -1,10 +1,13 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 
-
+// Handlebars middleware
+app.set('views', path.join(__dirname, 'views'));
+app.set('views', __dirname + '/views');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
