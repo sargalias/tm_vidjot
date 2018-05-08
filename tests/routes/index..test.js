@@ -1,10 +1,6 @@
+const app = require('../../src/app');
 const request = require('supertest');
-const app = require('./app');
 
-
-test('app is a function', () => {
-    expect(app).toBeTruthy();
-});
 
 describe('Route: /', () => {
     test('Should respond with statusCode 200 GET method', (done) => {
