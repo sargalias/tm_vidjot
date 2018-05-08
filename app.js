@@ -1,7 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-require('dotenv').config();
 const db = require('./config/db');
 
 
