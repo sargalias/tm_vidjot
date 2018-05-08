@@ -1,6 +1,6 @@
 
 module.exports.login = (req, res) => {
-    res.send('login');
+    res.render('users/login');
 };
 
 module.exports.register = (req, res) => {
