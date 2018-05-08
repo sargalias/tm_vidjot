@@ -10,6 +10,9 @@ function config(app) {
     app.engine('handlebars', exphbs({defaultLayout: 'main'}));
     app.set('view engine', 'handlebars');
 
+    // Public folder
+    app.use(express.static(path.join(__dirname, 'public')));
+
     // Body-Parser middleware
     app.use(express.urlencoded({extended: false}));
     app.use(express.json());
