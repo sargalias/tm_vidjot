@@ -11,9 +11,11 @@ require('./config/general')(app);
 // Routes
 const indexRoutes = require('./routes/index');
 const ideaRoutes = require('./routes/ideas');
+const userRoutes = require('./routes/users');
 
 app.use(indexRoutes);
 app.use('/ideas', ideaRoutes);
+app.use('/users', userRoutes);
 
 
 
