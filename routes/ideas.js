@@ -87,4 +87,13 @@ router.put('/:idea_id', formValidation, (req, res, next) => {
     });
 });
 
+router.delete('/:idea_id', (req, res, next) => {
+    Idea.findByIdAndRemove(req.params.idea_id, (err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/ideas');
+    });
+});
+
 module.exports = router;
