@@ -13,6 +13,10 @@ app.set('views', __dirname + '/views');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+// Body-Parser middleware
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
 // Routes
 const indexRoutes = require('./routes/index');
 const ideaRoutes = require('./routes/ideas');
