@@ -37,6 +37,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.use(session(sessionConfig));
 
+// Connect flash middleware
+app.use(flash());
+
+// Global variables
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 // Routes
 const indexRoutes = require('./routes/index');
