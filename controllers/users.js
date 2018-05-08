@@ -4,7 +4,7 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.register = (req, res) => {
-    res.send('register');
+    res.render('users/register');
 };
 
 module.exports.logout = (req, res) => {
