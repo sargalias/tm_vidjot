@@ -28,6 +28,7 @@ module.exports.new = (req, res) => {
 
 module.exports.create = (req, res, next) => {
     const errors = validationResult(req);
+    const data = matchedData(req);
     if (!errors.isEmpty()) {
         return res.render('ideas/new', {
             errors: errors.array(),
@@ -35,7 +36,11 @@ module.exports.create = (req, res, next) => {
             details: req.body.details
         });
     }
-    const idea = new Idea(req.body);
+    const idea = new Idea({
+        title: data.title,
+        details: data.details,
+        userId: req.user.id
+    });
     idea.save((err) => {
         if (err) {
             return next(err);
