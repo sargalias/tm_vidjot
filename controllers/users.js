@@ -32,11 +32,11 @@ module.exports.registerPost = (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.render('users/register', {errors: errors.array({onlyFirstError: true}), name: user.name, email: user.email})
     }
-    User.findOne({email: user.email}, (err, user) => {
+    User.findOne({email: user.email}, (err, registeredUser) => {
         if (err) {
             return next(err);
         }
-        if (user) {
+        if (registeredUser) {
             req.flash('error_msg', 'This email has already been registered');
             return res.redirect('back');
         }
@@ -51,7 +51,13 @@ module.exports.registerPost = (req, res, next) => {
                     return next(err);
                 }
                 req.flash('success_msg', 'You are now registered');
-                res.redirect('/users/login');
+                req.login(newUser, (err) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    console.log('logged in manually');
+                    return res.redirect('/ideas');
+                });
             });
         });
     });
