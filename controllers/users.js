@@ -60,9 +60,11 @@ module.exports.login = (req, res) => {
     res.render('users/login');
 };
 
-module.exports.loginPost = (req, res) => {
-    res.send('loggin post route');
-};
+module.exports.loginPost = passport.authenticate('local', {
+    successRedirect: '/ideas',
+    failureRedirect: '/users/login',
+    failureFlash: true
+});
 
 module.exports.logout = (req, res) => {
     res.send('logout');
