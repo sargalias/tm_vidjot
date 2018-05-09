@@ -2,3 +2,7 @@
     width: 130px;
     margin: auto;
 }
+
+.btn-warning {
+    color: #fff !important;
+}
