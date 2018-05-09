@@ -8,6 +8,8 @@ router.post('/register', uc.registerValidation, uc.registerPost);
 
 router.get('/login', uc.login);
 
+router.post('/login', uc.loginPost);
+
 router.get('/logout', uc.logout);
 
 module.exports = router;

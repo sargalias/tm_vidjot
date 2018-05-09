@@ -21,10 +21,6 @@ module.exports.registerValidation = [
     sanitizeBody('password').escape()
 ];
 
-module.exports.login = (req, res) => {
-    res.render('users/login');
-};
-
 module.exports.register = (req, res) => {
     res.render('users/register');
 };
@@ -58,6 +54,14 @@ module.exports.registerPost = (req, res, next) => {
             });
         });
     });
+};
+
+module.exports.login = (req, res) => {
+    res.render('users/login');
+};
+
+module.exports.loginPost = (req, res) => {
+    res.send('loggin post route');
 };
 
 module.exports.logout = (req, res) => {
