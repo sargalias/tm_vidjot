@@ -12,7 +12,7 @@ module.exports.formValidation = [
 
 module.exports.index = (req, res) => {
     Idea
-        .find()
+        .find({userId: req.user.id})
         .sort({date: -1})
         .exec((err, ideas) => {
             if (err) {

@@ -3,7 +3,7 @@ const ic = ideasController = require('../controllers/ideas');
 const {isLoggedIn} = require('../utilities/utility');
 
 
-router.get('/', ic.index);
+router.get('/', isLoggedIn, ic.index);
 
 router.get('/new', isLoggedIn, ic.new);
 
