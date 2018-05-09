@@ -1,5 +1,7 @@
 const { body, validationResult } = require('express-validator/check');
 const { matchedData, sanitizeBody } = require('express-validator/filter');
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
 
 
 module.exports.registerValidation = [
@@ -33,7 +35,20 @@ module.exports.registerPost = (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.render('users/register', {errors: errors.array({onlyFirstError: true}), name: user.name, email: user.email})
     }
-    res.send('passed');
+    let newUser = new User({
+        name: user.name,
+        email: user.email,
+    });
+    bcrypt.hash(user.password, 10, (err, hash) => {
+        newUser.password = hash;
+        newUser.save((err) => {
+            if (err) {
+                return next(err);
+            }
+            req.flash('success_msg', 'You are now registered');
+            res.redirect('/users/login');
+        });
+    });
 };
 
 module.exports.logout = (req, res) => {
