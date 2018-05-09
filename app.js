@@ -1,11 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const db = require('./config/db');
+const passport = require('passport');
 
 const app = express();
 
 // General middleware and config
 require('./config/general')(app);
+require('./config/passport')(passport);
 
 
 // Routes

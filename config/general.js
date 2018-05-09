@@ -4,6 +4,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 
 function config(app) {
     // Handlebars middleware
@@ -44,5 +45,8 @@ function config(app) {
         res.locals.error = req.flash('error');
         next();
     });
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 }
 module.exports = config;
