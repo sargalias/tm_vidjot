@@ -35,18 +35,27 @@ module.exports.registerPost = (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.render('users/register', {errors: errors.array({onlyFirstError: true}), name: user.name, email: user.email})
     }
-    let newUser = new User({
-        name: user.name,
-        email: user.email,
-    });
-    bcrypt.hash(user.password, 10, (err, hash) => {
-        newUser.password = hash;
-        newUser.save((err) => {
-            if (err) {
-                return next(err);
-            }
-            req.flash('success_msg', 'You are now registered');
-            res.redirect('/users/login');
+    User.findOne({email: user.email}, (err, user) => {
+        if (err) {
+            return next(err);
+        }
+        if (user) {
+            req.flash('error_msg', 'This email has already been registered');
+            return res.redirect('back');
+        }
+        let newUser = new User({
+            name: user.name,
+            email: user.email,
+        });
+        bcrypt.hash(user.password, 10, (err, hash) => {
+            newUser.password = hash;
+            newUser.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                req.flash('success_msg', 'You are now registered');
+                res.redirect('/users/login');
+            });
         });
     });
 };
