@@ -74,5 +74,6 @@ module.exports.loginPost = passport.authenticate('local', {
 });
 
 module.exports.logout = (req, res) => {
-    res.send('logout');
+    req.logout();
+    res.redirect('/ideas');
 };
